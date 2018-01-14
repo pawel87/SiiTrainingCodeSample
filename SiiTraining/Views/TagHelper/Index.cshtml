@@ -1,0 +1,28 @@
+﻿<h1>Bootstrap Components with TagHelpers</h1>
+
+<form>
+
+    <div title="Create new order"></div>
+
+
+    <button type="button" bs-button-color="warning">Click me</button>
+    <button type="button" bs-button-color="danger">Click me</button>
+
+</form>
+
+
+<environment  include="Development">
+    <h2>This is DEV environment</h2>
+</environment>
+<environment include="Staging,Production">
+    <h2>This is Staging or PRODUCTION environment!</h2>
+</environment>
+
+
+<cache expires-after="@TimeSpan.FromSeconds(30)">...content to be cached... @DateTime.Now</cache>
+<br/>
+<distributed-cache name="cache" expires-after="@TimeSpan.FromSeconds(10)">...cache something... @DateTime.Now</distributed-cache>
+<br/>
+
+<img gravatar-email="pbubien@pl.sii.eu" />
+<img gravatar-email="andrzej@test.com" gravatar-size="30"/>

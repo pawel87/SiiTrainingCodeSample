@@ -1,0 +1,36 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>Component example</h1>
+    @await  Component.InvokeAsync("ProductsSummary")
+
+    @await  Component.InvokeAsync("ProductSummary")
+
+    @await  Component.InvokeAsync("ProductSummaryWithHtml")
+    <br/>
+    @await Component.InvokeAsync("ProductSummaryWithTrustedHtml")
+
+    @await Component.InvokeAsync("ProductSummaryWithContextData")
+
+    @await Component.InvokeAsync("ProductSummaryWithArgument", new { manufacturer = "Samsung" })
+
+    @await Component.InvokeAsync("PageSize", new { url = "http://www.sii.pl" })
+</body>
+</html>
+
+
+<h4>Użycie View Component przy pomocy Tag Helper</h4>
+
+<vc:product-summary-with-argument manufacturer="Samsung">
+
+</vc:product-summary-with-argument>
+
+
+<vc:simple-class></vc:simple-class>

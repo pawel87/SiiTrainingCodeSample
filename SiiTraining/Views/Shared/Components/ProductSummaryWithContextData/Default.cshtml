@@ -1,0 +1,15 @@
+﻿@model SiiTraining.Models.Components.ProductSummaryViewModel
+
+<h3>Summary for manufacturer: @Model.Manufacturer</h3>
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>Total products:</td>
+            <td>@Model.ProductsCount</td>
+        </tr>
+        <tr>
+            <td>Total categories:</td>
+            <td>@Model.CategoriesCount</td>
+        </tr>
+    </tbody>
+</table>

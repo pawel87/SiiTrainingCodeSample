@@ -1,0 +1,9 @@
+﻿@model IEnumerable<SiiTraining.Code.DomainModels.Product>
+
+<h3>Top products</h3>
+<ul>
+    @foreach(var product in Model)
+    {
+        <li>@product.Name</li>
+    }
+</ul>

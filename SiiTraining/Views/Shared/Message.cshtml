@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Message";
+
+    Layout = null;
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if(ViewData.Model != null)
+{
+    if(ViewData.Model is string)
+    {
+        <text>@ViewData.Model</text>
+    }
+    else if (ViewData.Model is Dictionary<string, string>)
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Result Type</td>
+                    <td>@ViewData.Model["Result Type"]</td>
+                </tr>
+                <tr>
+                    <td>View Name</td>
+                    <td>@ViewData.Model["View Name"]</td>
+                </tr>
+                <tr>
+                    <td>Model Type</td>
+                    <td>@ViewData.Model["Model Type"]</td>
+                </tr>
+                <tr>
+                    <td>Model Data</td>
+                    <td>@ViewData.Model["Model Data"]</td>
+                </tr>
+            </tbody>
+        </table>
+
+    }
+}
+
