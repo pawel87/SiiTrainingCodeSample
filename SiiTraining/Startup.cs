@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Routing.Constraints;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using System.Text;
+using SiiTraining.Code.Middleware;
 
 namespace SiiTraining
 {
@@ -34,7 +36,11 @@ namespace SiiTraining
 
             services.AddScoped<IRepository, MemoryRepository>();
 
+            services.AddScoped<IDateService, DateService>();
+
             services.Configure<RouteOptions>(options => options.ConstraintMap.Add("weekday", typeof(WeekDayConstraint)));
+
+            #region Globalization
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
@@ -54,6 +60,9 @@ namespace SiiTraining
                 options.SupportedUICultures = supportedCultures;
             });
 
+            #endregion  
+
+            #region Cache
 
             //services.AddMemoryCache();
 
@@ -68,6 +77,9 @@ namespace SiiTraining
             //    option.InstanceName = "master";
             //});
 
+            services.AddResponseCaching();
+            
+
             //services.AddResponseCaching();
 
             //services.AddResponseCaching(options =>
@@ -76,11 +88,17 @@ namespace SiiTraining
             //    options.MaximumBodySize = 1024;
             //});
 
+            #endregion
 
-            //services.AddMvc(o =>
-            //{
-            //    o.ModelBinderProviders.Insert(0, new DateAndTimeModelBinderProvider());
-            //});
+
+            #region ModelBinder
+
+            services.AddMvc(o =>
+            {
+                o.ModelBinderProviders.Insert(0, new DateAndTimeModelBinderProvider());
+            });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,8 +114,55 @@ namespace SiiTraining
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            #region Caching
 
-#region GlobalizationSettings
+            app.UseResponseCaching();
+
+            #endregion
+
+            #region Middleware
+
+            //sample1
+            //app.Run(async (context) =>
+            //{
+            //    var text = "Hello World from inline middleware 1!";
+            //    var bytes = Encoding.ASCII.GetBytes(text);
+            //    await context.Response.Body.WriteAsync(bytes, 0, bytes.Length);
+            //});
+
+
+            //sample 2
+
+            //app.Use(async (context, next) =>
+            //{
+            //    var text = "Hello World from inline middleware 1!";
+            //    var bytes = Encoding.ASCII.GetBytes(text);
+            //    await context.Response.Body.WriteAsync(bytes, 0, bytes.Length);
+            //    await next.Invoke();
+            //});
+
+            //app.Run(async (context) =>
+            //{
+            //    var text = "Hello World from inline middleware 2!";
+            //    var bytes = Encoding.ASCII.GetBytes(text);
+            //    await context.Response.Body.WriteAsync(bytes, 0, bytes.Length);
+            //    //middleware logic here
+            //});
+
+            //sample 3
+
+            //app.UseMiddleware<SampleMiddleware>();
+            //app.UseSampleMiddleware();
+
+            // sample 4
+
+            //app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"), appBuilder =>
+            //{
+            //    app.UseSampleMiddleware();
+            //});
+            #endregion
+
+            #region GlobalizationSettings
             var supportedCultures = new List<CultureInfo>()
             {
                 new CultureInfo("pl-PL"),
@@ -126,6 +191,24 @@ namespace SiiTraining
 
             app.UseMvc(routes =>
             {
+                //routes.MapRoute(
+                //    name: "BindingModel",
+                //    template: "{controller=Binding}/{action=BindExample}/{category}",
+                //    defaults: null,
+                //    constraints: null,
+                //    dataTokens: new { Name = "binding_model" }
+                //    );
+
+                //routes.MapRoute(
+                //    name: "DataTokenExample",
+                //    template: "{controller=Routes}/{action=ActionWithToken}",
+                //    defaults: null,
+                //    constraints: null,
+                //    dataTokens: new { Name = "binding_model" }
+                //    );
+
+
+
                 //routes.MapRoute(
                 //  name: "CustomRouteConstraintInline",
                 //  template: "Routes/CustomConstraintInline/{day:weekday?}"
@@ -163,10 +246,15 @@ namespace SiiTraining
                 //                new AlphaRouteConstraint(),
                 //                new MinLengthRouteConstraint(6)
                 //            })
-                        
+
                 //    });
 
 
+                routes.MapRoute(
+                    name: "BindingModel",
+                    template: "{controller=Binding}/{action=BindExample}/{category}");
+
+                
 
                 //routes.MapRoute(
                 //    name: "componentRoute",

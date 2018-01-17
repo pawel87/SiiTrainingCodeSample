@@ -63,5 +63,17 @@ namespace SiiTraining.Controllers
         {
             return View("Message", "This is action result with some filters");
         }
+
+        [FilterWithOrder(Order = 1)]
+        public IActionResult FilterOrder()
+        {
+            return View("Message", "Some result");
+        }
+
+        [SampleActionFilter("abc")]
+        public IActionResult FilterFactorySample()
+        {
+            return View("Message", "Example of IFilterFactory");
+        }
     }
 }

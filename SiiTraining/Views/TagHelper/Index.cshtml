@@ -1,4 +1,8 @@
-﻿<h1>Bootstrap Components with TagHelpers</h1>
+﻿@*@tagHelperPrefix "helper:"*@
+
+@*<helper:no-follow href="http://www.wp.pl">wp.pl</helper:no-follow>*@
+
+<h1>Bootstrap Components with TagHelpers</h1>
 
 <form>
 
@@ -26,3 +30,12 @@
 
 <img gravatar-email="pbubien@pl.sii.eu" />
 <img gravatar-email="andrzej@test.com" gravatar-size="30"/>
+
+<h4>No Follow Version 1</h4>
+<no-follow href="http://www.google.pl">google</no-follow>
+<no-follow href="http://www.sii.pl">Sii.pl</no-follow>
+
+<h4>No Follow Version 2</h4>
+<a href="http://www.google.pl">google</a>
+<a href="http://www.sii.pl">Sii.pl</a>
+

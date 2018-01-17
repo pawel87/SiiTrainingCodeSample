@@ -23,6 +23,8 @@ namespace SiiTraining.Code.Filters
                         Model = "The data received by the application cannot be processed"
                     }
                 };
+
+                context.ExceptionHandled = true;
             }
 
         }

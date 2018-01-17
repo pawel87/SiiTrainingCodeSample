@@ -22,5 +22,13 @@
       <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.hosting\2.0.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.dll</HintPath>
     </Reference>
   </ItemGroup>
+  
+  <Target Name="CopyDepsFiles" AfterTargets="Build" Condition="'$(TargetFramework)'!=''">  
+  <ItemGroup>
+    <DepsFilePaths Include="$([System.IO.Path]::ChangeExtension('%(_ResolvedProjectReferencePaths.FullPath)', '.deps.json'))" />
+  </ItemGroup>
+
+  <Copy SourceFiles="%(DepsFilePaths.FullPath)" DestinationFolder="$(OutputPath)" Condition="Exists('%(DepsFilePaths.FullPath)')" />
+</Target>  
 
 </Project>

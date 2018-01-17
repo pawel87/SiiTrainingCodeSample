@@ -32,5 +32,14 @@ namespace SiiTraining.IntegrationTests
                 }
             }
         }
+
+        //IMPORTANT: Add to csproj
+        //<Target Name = "CopyDepsFiles" AfterTargets="Build" Condition="'$(TargetFramework)'!=''">  
+        //  <ItemGroup>
+        //    <DepsFilePaths Include = "$([System.IO.Path]::ChangeExtension('%(_ResolvedProjectReferencePaths.FullPath)', '.deps.json'))" />
+        //  </ ItemGroup >
+
+        //  < Copy SourceFiles="%(DepsFilePaths.FullPath)" DestinationFolder="$(OutputPath)" Condition="Exists('%(DepsFilePaths.FullPath)')" />
+        //</Target>  
     }
 }

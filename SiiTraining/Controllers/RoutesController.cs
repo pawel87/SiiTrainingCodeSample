@@ -18,5 +18,11 @@ namespace SiiTraining.Controllers
             return View("Message", $"Inline constraint. Selected day: {day}");
         }
         
+        public IActionResult ActionWithToken()
+        {
+            var token = RouteData.DataTokens["Name"];
+
+            return View("Message", "Data Token Sample");
+        }
     }
 }
