@@ -48,6 +48,30 @@ namespace SiiTraining.Controllers
             return View();
         }
 
+        public IActionResult AddToCache()
+        {
+            var value = DateTime.Now;
+            memoryCache.Set("currentDate", value, new MemoryCacheEntryOptions().RegisterPostEvictionCallback(MyCallback, this));
+
+            return View("Message", "xxx");
+        }
+
+        public IActionResult RemoveFromCache()
+        {
+            memoryCache.Remove("currentDate");
+
+            return View("Message", "Removed");
+        }
+
+
+        private static void MyCallback(object key, object value, EvictionReason reason, object state)
+        {
+
+
+
+        }
+
+
         public CacheSampleResponse SomeExample()
         {
             var requestKey = "ABC";

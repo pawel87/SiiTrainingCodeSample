@@ -28,6 +28,12 @@ namespace SiiTraining
 
         public IConfiguration Configuration { get; }
 
+        // Production environment version of "ConfigureServices" method
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddMvc();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -100,6 +106,9 @@ namespace SiiTraining
 
             #endregion
         }
+
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
