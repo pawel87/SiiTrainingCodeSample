@@ -6,7 +6,8 @@ namespace SiiTraining.Code.Middleware
     {
         public static IApplicationBuilder UseSampleMiddleware(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<SampleMiddleware>();
+            builder.UseMiddleware<SampleMiddleware>();
+            return builder;
         }
     }
 }

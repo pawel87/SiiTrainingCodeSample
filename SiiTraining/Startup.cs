@@ -125,7 +125,7 @@ namespace SiiTraining
 
             #region Caching
 
-            app.UseResponseCaching();
+            //app.UseResponseCaching();
 
             #endregion
 
@@ -144,6 +144,9 @@ namespace SiiTraining
 
             //app.Use(async (context, next) =>
             //{
+            //    //write logic which does NOT write to response (when calling next.Invoke())
+            //    //Console.WriteLine("Inline middleware call");
+
             //    var text = "Hello World from inline middleware 1!";
             //    var bytes = Encoding.ASCII.GetBytes(text);
             //    await context.Response.Body.WriteAsync(bytes, 0, bytes.Length);
@@ -161,6 +164,7 @@ namespace SiiTraining
             //sample 3
 
             //app.UseMiddleware<SampleMiddleware>();
+
             //app.UseSampleMiddleware();
 
             // sample 4

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,9 +19,22 @@ namespace SiiTraining.Code.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            await context.Response.WriteAsync("<div> Hello from Middleware </div>");
+            var sw = new Stopwatch();
+            sw.Start();
+
             await _next(context);
-            await context.Response.WriteAsync("<div> Bye from Middleware </div>");
+
+            if(context.Response.StatusCode == 200)
+            {
+                sw.Stop();
+
+                using(var writer = new StreamWriter(context.Response.Body))
+                {
+                    var text = $"<div>Elapsed:{sw.ElapsedMilliseconds}</div>";
+                    writer.Write(text);
+                }
+
+            }
         }
     }
 }
