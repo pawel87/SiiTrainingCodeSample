@@ -9,7 +9,7 @@ namespace SiiTraining.Code.Binding
 {
     public class DateAndTimeModelBinderProvider : IModelBinderProvider
     {
-        private readonly IModelBinder binder = new DateAndTimeModelBinderWithFallback(new SimpleTypeModelBinder(typeof(DateTime)));
+        private readonly IModelBinder binder = new DateAndTimeModelBinder();
 
         public IModelBinder GetBinder(ModelBinderProviderContext context)
         {

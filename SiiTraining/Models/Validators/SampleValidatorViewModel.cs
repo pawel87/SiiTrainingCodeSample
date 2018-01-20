@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SiiTraining.Models.Validators
 {
-    public class SampleValidatorViewModel
+    public class SampleValidatorViewModel : IValidatableObject
     {
         [Required(ErrorMessage = "This field is required")]
         [StringLength(50, ErrorMessage = "Length cannot exceed 50 characters")]
@@ -15,5 +15,11 @@ namespace SiiTraining.Models.Validators
 
         [CustomYearValidation(ErrorMessage = "Please input valid year")]
         public int Year { get; set; }
+
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            yield return new ValidationResult("bla");
+        }
     }
 }

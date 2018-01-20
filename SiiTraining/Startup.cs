@@ -231,12 +231,12 @@ namespace SiiTraining
                 //  template: "Routes/CustomConstraintInline/{day:weekday?}"
                 //);
 
-                //routes.MapRoute(
-                //  name: "CustomRouteConstraint",
-                //  template: "{controller}/{action}/{day?}",
-                //  defaults: new { controller = "Routes", action = "CustomConstraint" },
-                //  constraints: new { day = new WeekDayConstraint() }
-                //);
+                routes.MapRoute(
+                  name: "CustomRouteConstraint",
+                  template: "{controller}/{action}/{day}",
+                  defaults: new { controller = "Routes", action = "CustomConstraint" },
+                  constraints: new { day = new WeekDayConstraint() }
+                );
 
 
                 //routes.MapRoute(
@@ -267,11 +267,11 @@ namespace SiiTraining
                 //    });
 
 
-                routes.MapRoute(
-                    name: "BindingModel",
-                    template: "{controller=Binding}/{action=BindExample}/{category}");
+                //routes.MapRoute(
+                //    name: "BindingModel",
+                //    template: "{controller=Binding}/{action=BindExample}/{category}");
 
-                
+
 
                 //routes.MapRoute(
                 //    name: "componentRoute",

@@ -17,6 +17,12 @@ namespace SiiTraining.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        public IActionResult TestCollection(List<string> Users)
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public IActionResult BindExample(MyComplexViewModel model)
