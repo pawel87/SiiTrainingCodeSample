@@ -5,7 +5,7 @@ namespace SiiTraining.Code.Filters
 {
     public class FilterWithOrderAttribute : Attribute, IActionFilter, IOrderedFilter
     {
-        public int Order { get; set; }
+        public int Order { get; set; } 
 
         public void OnActionExecuting(ActionExecutingContext context)
         {

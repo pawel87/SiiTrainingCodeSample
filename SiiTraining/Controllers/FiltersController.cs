@@ -4,12 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SiiTraining.Code.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace SiiTraining.Controllers
 {
     
     public class FiltersController : Controller
     {
+        private ILogger logger;
+
+        public FiltersController(ILoggerFactory loggerFactory)
+        {
+            this.logger = loggerFactory.CreateLogger<FiltersController>();
+        }
+
+        public IActionResult DummyForLog()
+        {
+            this.logger.LogInformation("test");
+            return View();
+        }
+
         [HttpsOnly]
         public IActionResult OnlyHttps()
         {

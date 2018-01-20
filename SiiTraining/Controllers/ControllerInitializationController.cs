@@ -17,7 +17,7 @@ namespace SiiTraining.Controllers
 
         [HttpGet]
         [ActionName("Index")]
-        //[IsMobile]
+        [IsMobile]
         public IActionResult IndexMobile()
         {
             return View("Message", "Hello Mobile!");

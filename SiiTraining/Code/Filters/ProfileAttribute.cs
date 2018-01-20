@@ -14,8 +14,7 @@ namespace SiiTraining.Code.Filters
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            
-
+           
             timer = Stopwatch.StartNew();
         }
 

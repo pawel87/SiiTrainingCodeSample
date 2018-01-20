@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SiiTraining.Code.Services;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,14 @@ namespace SiiTraining.Code.Filters
     public class SampleActionFilterImpl : ActionFilterAttribute
     {
         private readonly IRepository repository;
+        private readonly ILogger<SampleActionFilterImpl> logger;
         private string text;
         private readonly SomeOptions options;
 
-        public SampleActionFilterImpl(IRepository repository, string text, SomeOptions options)
+        public SampleActionFilterImpl(IRepository repository, ILoggerFactory loggerFactory, string text, SomeOptions options)
         {
             this.repository = repository;
+            this.logger = loggerFactory.CreateLogger<SampleActionFilterImpl>();
             this.text = text;
             this.options = options;
         }
@@ -25,6 +28,7 @@ namespace SiiTraining.Code.Filters
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var data = repository.GetAllProducts();
+            logger.LogInformation("hello");
             Console.WriteLine($"Hello {text}");
         }
     }
@@ -45,6 +49,7 @@ namespace SiiTraining.Code.Filters
         {
             return new SampleActionFilterImpl(
                 serviceProvider.GetRequiredService<IRepository>(),
+                serviceProvider.GetRequiredService<ILoggerFactory>(),
                 text,
                 new SomeOptions { Value = 12345 });
         }

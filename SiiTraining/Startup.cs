@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Text;
 using SiiTraining.Code.Middleware;
+using Microsoft.Extensions.Logging;
 
 namespace SiiTraining
 {
@@ -111,7 +112,7 @@ namespace SiiTraining
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -122,6 +123,9 @@ namespace SiiTraining
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            loggerFactory.AddConsole();
+
 
             #region Caching
 
